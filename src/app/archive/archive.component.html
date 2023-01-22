@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="col-7 border rounded-5 primary center p-5">
+
+      <h4 class="display-6 text-white text-center">Insira seu arquivo csv</h4>
+
+      <form #formulario="ngForm" (ngSubmit)="onSubmit()">
+        <input
+          type="file"
+          id="arquivo"
+          class="form-control mt-4"
+          (change)="insertArchive($event)"
+          observeFiles
+        />
+        <div class="text-end">
+          <button type="submit" class="btn btn-primary mt-4 text-end">
+            Enviar Arquivo
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

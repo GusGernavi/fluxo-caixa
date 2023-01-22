@@ -1,0 +1,12 @@
+.center {
+  margin: auto;
+}
+
+.row {
+  height: 100vh !important;
+  max-height: 100% !important;
+}
+
+.primary {
+  background-color: rgb(134, 187, 233);
+}

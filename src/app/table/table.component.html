@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="row">
+    <table class="table align-middle table-primary mt-5 table-striped text-center">
+      <thead>
+        <tr>
+          <th class="table-primary" *ngFor="let head of head">{{ head }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fluxo of tabela">
+          <td>{{ fluxo.data | date : "dd/MM/YYYY" }}</td>
+          <td>{{ fluxo.gasto | currency : "BRL" }}</td>
+          <td>{{ fluxo.receita | currency : "BRL" }}</td>
+          <td>{{ fluxo.saldo | currency : "BRL" }}</td>
+          <td *ngIf="!fluxo.preset">
+            <input
+              required
+              class="form-control"
+              type="text"
+              name="onde"
+              id="onde"
+              [(ngModel)]="fluxo.onde"
+              [alt]="fluxo.onde"
+            />
+          </td>
+          <td *ngIf="!fluxo.preset">
+            <input
+              required
+              type="text"
+              class="form-control"
+              name="categoria"
+              id="categoria"
+              [(ngModel)]="fluxo.categoria"
+            />
+          </td>
+          <td *ngIf="!fluxo.preset">
+            <input
+              required
+              type="text"
+              class="form-control"
+              name="fvi"
+              id="fvi"
+              [(ngModel)]="fluxo.fvi"
+            />
+          </td>
+          <td *ngIf="!fluxo.preset">
+          </td>
+          <td *ngIf="fluxo.preset">{{ fluxo.onde }}</td>
+          <td *ngIf="fluxo.preset">{{ fluxo.categoria }}</td>
+          <td *ngIf="fluxo.preset">{{ fluxo.fvi }}</td>
+          <td *ngIf="fluxo.preset">
+            <button
+              type="button"
+              (click)="fluxo.preset = false"
+              class="btn btn-primary"
+            >
+              Editar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row">
+    <div class="text-end">
+      <button
+        [disabled]="isInvalidTable(false)"
+        type="submit"
+        (click)="refactorTable()"
+        class="btn btn-primary col-1"
+      >
+        Atualizar
+      </button>
+      <button type="button" (click)="edit()" class="btn btn-warning mx-2 col-1">
+        Editar
+      </button>
+      <button type="button" routerLink="" class="btn btn-success mx-2 col-1">
+        Voltar
+      </button>
+      <button
+        type="button"
+        (click)="saveExcel()"
+        [disabled]="isInvalidTable(true)"
+        class="btn btn-success mx-2 col-2 p-2"
+      >
+        Imprimir EXCEL
+      </button>
+    </div>
+  </div>
+</div>
