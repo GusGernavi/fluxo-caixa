@@ -56,7 +56,7 @@ export class TableFluxoService {
 
         const linesStringClean = linesString?.slice(6, linesString.length);
 
-        linesStringClean?.reverse().forEach((item, index) => {
+        linesStringClean?.forEach((item, index) => {
           if(item.length <= 0) {
             return;
           }
@@ -67,8 +67,10 @@ export class TableFluxoService {
 
           split.forEach((item, index) => {
             if(index == 0) {
+              console.log(item);
+
               // DATA
-              fluxo.data = moment(item, 'dd/MM/YYYY').toDate();
+              fluxo.data = moment(item, 'DD/MM/YYYY').toDate();
             }
 
             if(index == 1) {
@@ -99,15 +101,15 @@ export class TableFluxoService {
               // SALDO
 
               if(item.includes('-')) {
-                fluxo.gasto = parseFloat(item.replace('-', '').replace(',', '.'));
+                fluxo.gasto = parseFloat(item.replace('-', '').replaceAll('.', '').replace(',', '.'));
               } else {
-                fluxo.receita = parseFloat(item.replace(',', '.'));
+                fluxo.receita = parseFloat(item.replaceAll('.', '').replace(',', '.'));
               }
 
             }
 
             if(index == 3) {
-              fluxo.saldo = parseFloat(item.replace(',', '.'));
+              fluxo.saldo = parseFloat(item.replaceAll('.', '').replace(',', '.'));
             }
 
           });
